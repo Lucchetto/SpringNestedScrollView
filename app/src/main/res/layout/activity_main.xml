@@ -7,10 +7,15 @@
     tools:context=".MainActivity"
     android:fillViewport="true">
 
-    <ImageView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="3000dp"
-        android:src="@drawable/bliss"
-        android:scaleType="centerCrop"/>
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1500dp"
+            android:src="@drawable/bliss"
+            android:scaleType="centerCrop"/>
+    </FrameLayout>
 
 </com.zhenxiang.spring.SpringNestedScrollView>
