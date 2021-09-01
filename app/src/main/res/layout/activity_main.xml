@@ -7,15 +7,23 @@
     tools:context=".MainActivity"
     android:fillViewport="true">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SpringNestedScrollView"
+            android:padding="20dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1500dp"
             android:src="@drawable/bliss"
             android:scaleType="centerCrop"/>
-    </FrameLayout>
+    </LinearLayout>
 
 </com.zhenxiang.spring.SpringNestedScrollView>

@@ -97,15 +97,15 @@ class SpringEdgeEffect(private val view: View, val direction: Int): EdgeEffect(v
     private fun createAnim() = SpringAnimation(view, if (isHorizontal) SpringAnimation.TRANSLATION_X else SpringAnimation.TRANSLATION_Y)
         .setSpring(SpringForce()
             .setFinalPosition(0f)
-            .setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY)
-            .setStiffness(SpringForce.STIFFNESS_LOW)
+            .setDampingRatio(0.7f)
+            .setStiffness(225f)
         )
 
     companion object {
         /** The magnitude of translation distance while the list is over-scrolled. */
-        private const val OVERSCROLL_TRANSLATION_MAGNITUDE = 0.25f
+        private const val OVERSCROLL_TRANSLATION_MAGNITUDE = 0.175f
 
         /** The magnitude of translation distance when the list reaches the edge on fling. */
-        private const val FLING_TRANSLATION_MAGNITUDE = 0.15f
+        private const val FLING_TRANSLATION_MAGNITUDE = 0.275f
     }
 }
