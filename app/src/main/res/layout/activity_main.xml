@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<com.zhenxiang.spring.SpringNestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,8 +9,8 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="2000dp"
+        android:layout_height="3000dp"
         android:src="@drawable/bliss"
         android:scaleType="centerCrop"/>
 
-</androidx.core.widget.NestedScrollView>
+</com.zhenxiang.spring.SpringNestedScrollView>
