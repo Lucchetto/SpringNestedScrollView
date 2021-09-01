@@ -2038,8 +2038,8 @@ public class SpringNestedScrollView extends FrameLayout implements NestedScrolli
         recycleVelocityTracker();
         stopNestedScroll(ViewCompat.TYPE_TOUCH);
 
-        mEdgeGlowTop.onRelease();
-        mEdgeGlowBottom.onRelease();
+        mEdgeGlowTop.onRelease(true);
+        mEdgeGlowBottom.onRelease(true);
     }
 
     /**

@@ -78,9 +78,13 @@ class SpringEdgeEffect(private val view: View, val direction: Int): EdgeEffect(v
         }
     }
 
-    override fun onRelease() {
+    fun onRelease(animate: Boolean) {
         super.onRelease()
-        clearTranslation()
+        clearTranslation(animate)
+    }
+
+    override fun onRelease() {
+        onRelease(false)
     }
 
     override fun isFinished(): Boolean {
@@ -88,10 +92,19 @@ class SpringEdgeEffect(private val view: View, val direction: Int): EdgeEffect(v
         return translationAnim?.isRunning?.not() ?: true
     }
 
-    private fun clearTranslation() {
+    private fun clearTranslation(animate: Boolean) {
         pullDistance = 0f
-        view.translationX = 0f
-        view.translationY = 0f
+        if (animate) {
+            if ((view.translationY != 0f && !isHorizontal) || (view.translationX != 0f && isHorizontal)) {
+                translationAnim = createAnim()?.also { it.start() }
+            }
+        } else {
+            if (isHorizontal) {
+                view.translationX = 0f
+            } else {
+                view.translationY = 0f
+            }
+        }
     }
 
     private fun createAnim() = SpringAnimation(view, if (isHorizontal) SpringAnimation.TRANSLATION_X else SpringAnimation.TRANSLATION_Y)
