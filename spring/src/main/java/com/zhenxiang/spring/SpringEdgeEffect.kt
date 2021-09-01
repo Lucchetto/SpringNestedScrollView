@@ -90,10 +90,8 @@ class SpringEdgeEffect(private val view: View, val direction: Int): EdgeEffect(v
 
     private fun clearTranslation() {
         pullDistance = 0f
-        // The finger is lifted. Start the animation to bring translation back to the resting state.
-        if ((view.translationY != 0f && !isHorizontal) || (view.translationX != 0f && isHorizontal)) {
-            translationAnim = createAnim()?.also { it.start() }
-        }
+        view.translationX = 0f
+        view.translationY = 0f
     }
 
     private fun createAnim() = SpringAnimation(view, if (isHorizontal) SpringAnimation.TRANSLATION_X else SpringAnimation.TRANSLATION_Y)
