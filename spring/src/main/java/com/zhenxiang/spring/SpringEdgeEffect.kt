@@ -27,7 +27,6 @@ class SpringEdgeEffect(private val view: View, val direction: Int) {
         // This is called on every touch event while the list is scrolled with a finger.
 
         pullDistance += deltaDistance
-        pullDistance = Math.min(1.0f, pullDistance);
         // Translate the recyclerView with the distance
         val translationDelta = sign * (if (isHorizontal) view.width else view.height) *
                 deltaDistance * OVERSCROLL_TRANSLATION_MAGNITUDE
@@ -95,7 +94,7 @@ class SpringEdgeEffect(private val view: View, val direction: Int) {
     private fun createAnim() = SpringAnimation(view, if (isHorizontal) SpringAnimation.TRANSLATION_X else SpringAnimation.TRANSLATION_Y)
         .setSpring(SpringForce()
             .setFinalPosition(0f)
-            .setDampingRatio(0.7f)
+            .setDampingRatio(1f)
             .setStiffness(225f)
         )
 
