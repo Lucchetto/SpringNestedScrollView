@@ -1,14 +1,11 @@
 package com.zhenxiang.spring
 
-import android.graphics.Canvas
 import android.view.View
-import android.widget.EdgeEffect
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.math.absoluteValue
 
-class SpringEdgeEffect(private val view: View, val direction: Int): EdgeEffect(view.context) {
+class SpringEdgeEffect(private val view: View, val direction: Int) {
 
     // A reference to the [SpringAnimation] for this RecyclerView used to bring the item back after the over-scroll effect.
     var translationAnim: SpringAnimation? = null
@@ -22,21 +19,11 @@ class SpringEdgeEffect(private val view: View, val direction: Int): EdgeEffect(v
     private val sign = if (direction == RecyclerView.EdgeEffectFactory.DIRECTION_BOTTOM ||
             direction == RecyclerView.EdgeEffectFactory.DIRECTION_RIGHT) -1 else 1
 
-    override fun draw(canvas: Canvas?): Boolean {
-        return false
-    }
-
-    override fun onPull(deltaDistance: Float) {
-        super.onPull(deltaDistance)
+    fun onPull(deltaDistance: Float) {
         handlePull(deltaDistance)
     }
 
-    override fun onPull(deltaDistance: Float, displacement: Float) {
-        super.onPull(deltaDistance, displacement)
-        handlePull(deltaDistance)
-    }
-
-    private fun handlePull(deltaDistance: Float, allowNegativeDelta: Boolean = false) {
+    private fun handlePull(deltaDistance: Float) {
         // This is called on every touch event while the list is scrolled with a finger.
 
         pullDistance += deltaDistance
@@ -68,9 +55,7 @@ class SpringEdgeEffect(private val view: View, val direction: Int): EdgeEffect(v
         return pullDistance.coerceAtLeast(0f)
     }
 
-    override fun onAbsorb(velocity: Int) {
-        super.onAbsorb(velocity)
-
+    fun onAbsorb(velocity: Int) {
         // The list has reached the edge on fling.
         val translationVelocity = sign * velocity * FLING_TRANSLATION_MAGNITUDE
         translationAnim?.cancel()
@@ -80,15 +65,14 @@ class SpringEdgeEffect(private val view: View, val direction: Int): EdgeEffect(v
     }
 
     fun onRelease(animate: Boolean) {
-        super.onRelease()
         clearTranslation(animate)
     }
 
-    override fun onRelease() {
+    fun onRelease() {
         onRelease(false)
     }
 
-    override fun isFinished(): Boolean {
+    fun isFinished(): Boolean {
         // Without this, will skip future calls to onAbsorb()
         return translationAnim?.isRunning?.not() ?: true
     }

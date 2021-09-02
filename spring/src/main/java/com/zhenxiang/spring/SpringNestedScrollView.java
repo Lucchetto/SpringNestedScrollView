@@ -2068,50 +2068,6 @@ public class SpringNestedScrollView extends FrameLayout implements NestedScrolli
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        final int scrollY = getScrollY();
-        if (!mEdgeGlowTop.isFinished()) {
-            final int restoreCount = canvas.save();
-            int width = getWidth();
-            int height = getHeight();
-            int xTranslation = 0;
-            int yTranslation = Math.min(0, scrollY);
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || getClipToPadding()) {
-                width -= getPaddingLeft() + getPaddingRight();
-                xTranslation += getPaddingLeft();
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && getClipToPadding()) {
-                height -= getPaddingTop() + getPaddingBottom();
-                yTranslation += getPaddingTop();
-            }
-            canvas.translate(xTranslation, yTranslation);
-            mEdgeGlowTop.setSize(width, height);
-            if (mEdgeGlowTop.draw(canvas)) {
-                ViewCompat.postInvalidateOnAnimation(this);
-            }
-            canvas.restoreToCount(restoreCount);
-        }
-        if (!mEdgeGlowBottom.isFinished()) {
-            final int restoreCount = canvas.save();
-            int width = getWidth();
-            int height = getHeight();
-            int xTranslation = 0;
-            int yTranslation = Math.max(getScrollRange(), scrollY) + height;
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || getClipToPadding()) {
-                width -= getPaddingLeft() + getPaddingRight();
-                xTranslation += getPaddingLeft();
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && getClipToPadding()) {
-                height -= getPaddingTop() + getPaddingBottom();
-                yTranslation -= getPaddingBottom();
-            }
-            canvas.translate(xTranslation - width, yTranslation);
-            canvas.rotate(180, width, 0);
-            mEdgeGlowBottom.setSize(width, height);
-            if (mEdgeGlowBottom.draw(canvas)) {
-                ViewCompat.postInvalidateOnAnimation(this);
-            }
-            canvas.restoreToCount(restoreCount);
-        }
     }
 
     private static int clamp(int n, int my, int child) {
